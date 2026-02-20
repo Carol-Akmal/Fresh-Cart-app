@@ -1,0 +1,83 @@
+<section class="bg-gray-100 p-6">
+    <div class="container mx-auto">
+        <div class="grid sm:grid-cols-12 gap-8">
+
+            <!-- Cart Items -->
+            <div class="col-span-8 space-y-4">
+                <div class="bg-gray-200 rounded-lg p-4 shadow">
+                    
+                  
+                    <!-- Header -->
+                    <div class="flex flex-wrap gap-3 mb-4 items-center">
+                        <h1 class="text-2xl ">Cart</h1>
+                       @if (CartDetailsData().products) 
+                       { <span class="text-gray-500 text-lg">{{CartDetailsData().products.length}} Items</span>}
+                    </div>
+
+                    <!-- Item -->
+                  @for (item of CartDetailsData().products; track item.product._id) {
+                      <div
+                        class="grid sm:grid-cols-12 gap-4 bg-gray-50 rounded-lg p-3 shadow  items-center mb-3">
+                       
+
+                        <!-- Image -->
+                        <div class="col-span-1">
+                            <img class="w-full " [src]="item.product.imageCover" [alt]="item.product.title">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-span-11 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-700 pb-2">{{item.product.title}}</h3>
+                                <div class="flex flex-wrap gap-3 items-center">
+
+                                    <!-- Quantity -->
+                                    <div class="flex items-center space-x-2 bg-gray-200 border rounded-lg py-1 px-3">
+                                        <button (click)="updateProductCount(item.product._id, item.count-1)"  class="text-lg p-1 rounded-lg cursor-pointer"><i
+                                                class="fas fa-minus"></i></button>
+                                        <span class="px-2">{{item.count}}</span>
+                                        <button (click)="updateProductCount(item.product._id, item.count+1)" class="text-lg p-1 rounded-lg cursor-pointer"><i
+                                                class="fas fa-plus"></i></button>
+                                    </div>
+
+                                    <!-- Trash -->
+                                    <button (click)="removeProductItemFromCart(item.product._id)"
+                                        class="text-lg p-2 hover:bg-red-500 hover:text-white rounded-lg cursor-pointer transition-colors duration-200">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+
+                            <!-- Price -->
+                            <span class="text-lg ">{{item.price*item.count |currency:'GBP'}}</span>
+                        </div>
+
+                    </div>
+                  }
+                  @empty {
+                    <h2>NO DATA FOUND...</h2>
+                  }
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-span-4">
+                <div class="bg-gray-200 shadow rounded-lg p-6 border border-gray-200 space-y-4">
+                    <h2 class="text-2xl ">Order Summary</h2>
+
+                    <div class="flex justify-between items-center py-2">
+                        <span class="text-lg text-gray-700">Price</span>
+                        <span class="text-lg font-medium">{{CartDetailsData().totalCartPrice  |currency:'GBP'}}</span>
+                    </div>
+
+                    <button [routerLink]="['/checkout', CartDetailsData()._id]"
+                        class="w-full bg-fuchsia-600 hover:bg-fuchsia-700 text-white py-3 rounded-lg  transition-colors duration-200">
+                        Proceed To Checkout
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

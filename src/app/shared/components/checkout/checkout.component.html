@@ -1,0 +1,38 @@
+<section class="border border-fuchsia-100 rounded-xl bg-gray-50 md:w-1/2 mx-auto my-16 p-6 shadow-lg">
+
+    <div class="title pb-6">
+        <h2 class="mb-2 text-3xl text-center font-semibold text-fuchsia-700">checkOut</h2>
+    </div>
+
+    <form [formGroup]="CheckOutForm" (ngSubmit)="onSubmitCheckOutForm()">
+       <div formGroupName="shippingAddress">
+         <div>
+          <label for="Details" class="main-label">Details</label>
+            <textarea formControlName="details" id="Details" class="main-input" ></textarea>
+        </div>
+
+         <div>
+            <label for="phone" class="main-label">Phone</label>
+            <input formControlName="phone" type="tel" id="phone" class="main-input" />
+        </div>
+
+         <div>
+            <label for="city" class="main-label">City</label>
+            <input formControlName="city" type="text" id="city" class="main-input" />
+        </div>
+       </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn-main w-full px-3">
+                paymint with visa
+
+            </button>
+            <button type="button" (click)="onSubmitCashOrder()" class="btn-main w-full px-3">
+            Cash on Delivery
+        </button>
+
+        </div>
+
+      
+    </form>
+</section>

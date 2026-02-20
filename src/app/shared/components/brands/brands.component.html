@@ -1,0 +1,41 @@
+<section class="py-10">
+    <div class="container mx-auto px-3 ">
+
+        <h2 class="text-5xl text-fuchsia-600 font-medium text-center italic pb-6">show All Brands </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+
+
+            @for (brand of brandsList(); track brand._id) {
+
+
+
+            <div
+                class="group/card border border-fuchsia-200 rounded-lg p-3 bg-white flex flex-col h-full justify-between transition-shadow duration-300 hover:shadow-md overflow-hidden">
+
+
+                <div class="cursor-pointer">
+
+                    <div class="mb-3 overflow-hidden rounded-md bg-gray-50">
+                        <img [src]="brand.image" [alt]="brand.name">
+                    </div>
+
+                    <div class="flex flex-col h-full">
+                        <h3 class="text-fuchsia-600 text-lg mb-2">{{ brand.name }}</h3>
+                        
+
+                     
+                    </div>
+                </div>
+
+                <button
+                    class="btn-main w-full translate-y-[120%] group-hover/card:translate-y-0 translation-[translate] duration-500">
+                    click to show 
+                </button>
+
+            </div>
+            }
+
+        </div>
+    </div>
+</section>

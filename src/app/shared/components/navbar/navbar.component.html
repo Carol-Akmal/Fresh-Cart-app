@@ -1,0 +1,176 @@
+<nav class="bg-gray-200  border-b border-default fixed top-0 start-0 w-full z-50">
+  <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="/assets/images/freshcart-logo.svg" alt="logo">
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
+      aria-controls="navbar-default" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
+      </svg>
+    </button>
+    <div class="hidden w-full md:flex md:grow  md:w-auto" id="navbar-default">
+      @if (islogin==true) {
+      <ul
+        class="font-medium  ms-4 flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base md:flex-row md:space-x-3 rtl:space-x-reverse md:mt-0 md:border-0">
+        <li>
+          <a routerLink="/home" routerLinkActive=" bg-fuchsia-400  text-white"
+            class="block py-2 px-3 rounded-xs md:py-1 md:px-2" aria-current="page">{{'HOME' | translate}}</a>
+        </li>
+
+        <li>
+          <a routerLink="/products" routerLinkActive=" bg-fuchsia-400  text-white"
+            class="block py-2 px-3 text-gray-700  rounded-xs md:py-1 md:px-2 "
+            aria-current="page">{{'PRODUCTS'|translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/categories" routerLinkActive=" bg-fuchsia-400  text-white"
+            class="block py-2 px-3 text-gray-700  rounded-xs md:py-1 md:px-2 "
+            aria-current="page">{{'CATEGORIES'|translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/brands" routerLinkActive=" bg-fuchsia-400  text-white"
+            class="block py-2 px-3 text-gray-700  rounded-xs md:py-1 md:px-2 "
+            aria-current="page">{{'BRANDS'|translate}}</a>
+        </li>
+
+
+      </ul>
+      }
+
+      <ul
+        class="font-medium ms-auto flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base md:flex-row md:space-x-2 rtl:space-x-reverse md:mt-0 md:border-0">
+        <li>
+          <a href="#" class="block py-2 px-1 rounded md:py-1" aria-current="page">
+            <i class="fab fa-facebook"></i>
+          </a>
+
+        </li>
+
+        <li>
+          <a href="#" class="block py-2 px-1 rounded md:py-1" aria-current="page">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+        </li>
+
+        <li>
+          <a href="#" class="block py-2 px-1 rounded md:py-1" aria-current="page">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+
+        </li>
+
+        <li>
+          <a href="#" class="block py-2 px-1 rounded md:py-1" aria-current="page">
+            <i class="fab fa-twitter"></i>
+          </a>
+
+        </li>
+
+        <li>
+          <a href="#" class="block py-2 px-1 rounded md:py-1" aria-current="page">
+            <i class="fab fa-youtube"></i>
+          </a>
+
+        </li>
+        <!-- start dropdown -->
+        <div class="relative inline-block text-left z-50">
+
+          <button type="button" (click)="toggleDropdown()"
+            class="flex items-center justify-between w-44 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition">
+            {{ selectedLanguage.name }}
+            <svg class="w-4 h-4 ml-2 transition-transform duration-200" [class.rotate-180]="isOpen" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          @if (isOpen) {
+          <div
+            class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden animate-in fade-in zoom-in duration-200">
+
+            @for (language of languages; track language.code) {
+            <button (click)="changeLanguage(language)"
+              class="flex items-center w-full gap-3 px-3 py-2 cursor-pointer transition text-start"
+              [class.bg-fuchsia-600]="language.code === selectedLanguage.code"
+              [class.text-white]="language.code === selectedLanguage.code" dir="ltr">
+              <div class="flex-1">
+                <p class="text-sm font-semibold" [class.text-fuchsia-700]="language.code !== selectedLanguage.code"
+                  [class.text-white]="language.code === selectedLanguage.code">
+                  {{ language.name }}
+                </p>
+                <p class="text-xs opacity-80" [class.text-gray-500]="language.code !== selectedLanguage.code"
+                  [class.text-fuchsia-100]="language.code === selectedLanguage.code">
+                  {{ language.code | uppercase }}
+                </p>
+              </div>
+
+              @if (language.code === selectedLanguage.code) {
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd" />
+              </svg>
+              }
+            </button>    
+            }
+
+          </div>
+          }
+
+        </div>
+
+
+        <!-- end dropdown -->
+
+
+        @if (islogin==false) {
+        <li>
+          <a routerLink="/register" routerLinkActive=" bg-fuchsia-400  text-white"
+            class="block py-2 px-3 rounded-xs md:py-1 md:px-2" aria-current="page">
+            {{'REGISTER'|translate}}
+          </a>
+
+        </li>
+
+        <li>
+          <a routerLink="/login" routerLinkActive=" bg-fuchsia-400  text-white"
+            class="block py-2 px-3 rounded-xs md:py-1 md:px-2" aria-current="page">
+            {{'LOGIN'|translate}}
+          </a>
+
+        </li>
+        }
+
+        @else {
+
+        <li>
+          <a routerLink="/cart" class="block relative py-2 px-3 cursor-pointer rounded-base md:p-0 text-gray-500">
+            <i class="fas fa-cart-shopping text-4xl"></i>
+            <span class="sr-only">Number of Cart Items</span>
+
+            <div
+              class="absolute flex items-center justify-center w-6 h-6 text-sm font-bold text-white bg-green-600 rounded-full -top-2 -end-1">
+              {{count()}}
+            </div>
+          </a>
+        </li>
+
+
+        <li>
+          <a (click)="SignOut()" routerLink="/signOut" routerLinkActive=" bg-fuchsia-400  text-white"
+            class="block py-2 px-3 rounded-xs md:py-1 md:px-2 cursor-pointer" aria-current="page">
+            {{'SIGNOUT'|translate}}
+          </a>
+
+        </li>
+        }
+
+      </ul>
+    </div>
+  </div>
+</nav>

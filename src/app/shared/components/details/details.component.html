@@ -1,0 +1,52 @@
+@if (productDetailsData().category) {
+<section class="py-16">
+    <div class="container xl:w-[95%]">
+        <div class="grid sm:grid-cols-12 items-center">
+            <div class="col-span-3">
+
+                <div>
+                    <img class="w-full" [src]="productDetailsData().imageCover" [alt]="productDetailsData().title"
+                        [title]="productDetailsData().title">
+                </div>
+
+
+            </div>
+
+
+
+            <div class="col-span-9">
+                <div>
+                    <h2 class="text-2xl  pb-2">{{productDetailsData().title}}</h2>
+                    <p class="text-gray-500 pb-2 text-sm"> {{productDetailsData().description}}</p>
+                    <h3 class="text-fuchsia-500 pb-2 text-base"> {{productDetailsData().category.name}}</h3>
+                    <div class=" flex flex-wrap items-center justify-between pb-2">
+                        <span>{{productDetailsData().price}} EGP</span>
+                        <span>
+                            <i class="fas fa-star text-fuchsia-600"></i>
+                            {{productDetailsData().ratingsAverage}}
+                        </span>
+                    </div>
+
+                    <button
+                        class="btn-main w-full translate-y-[120%] group-hover/card:translate-y-0 translation-[translate] duration-500">Add
+                        To Cart</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+}
+@else{
+<div class="col-span-5 w-1/4 mx-auto">
+    <div class="p-4 mt-4 text-center text-base 
+           border-2 border-fuchsia-600 
+           ring-2 ring-fuchsia-600/30 
+           text-fuchsia-700 
+           bg-fuchsia-50 
+           rounded-lg shadow-sm" role="alert">
+        No Data Found...
+    </div>
+</div>
+
+}

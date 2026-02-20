@@ -1,3 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+ 
+body{
+     font-family: "Oswald", sans-serif; 
+}
+
+
+@utility container{
+   margin: 0 auto;
+}
+.btn-main {
+    @apply bg-fuchsia-400 py-1.75 px-5 border border-gray-300 rounded-[5px] text-white cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300 hover:bg-fuchsia-600 transition-[background-color] duration-500;
+            }
+
+.card {
+     @apply border border-fuchsia-400 shadow-fuchsia-300 rounded p-3 
+}           
+.main-input{
+     @apply bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-xs focus:bg-white focus:border-fuchsia-600 block w-full px-3 py-2.5 shadow-xs 
+}
+.main-label{
+     @apply block mb-1.5 text-sm font-medium text-heading
+}

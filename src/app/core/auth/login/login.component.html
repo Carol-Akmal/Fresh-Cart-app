@@ -1,0 +1,109 @@
+<section class="border border-fuchsia-100 rounded-xl bg-gray-50 md:w-1/2 mx-auto mt-16 p-6 shadow-lg">
+
+    <div class="title pb-6">
+        <h2 class="mb-2 text-3xl text-center font-semibold text-fuchsia-700">login Now</h2>
+    </div>
+
+    <form [formGroup]="loginForms" (ngSubmit)="submitloginForm()" class="space-y-4">
+       
+
+        <div>
+            <label for="email" class="main-label">Email</label>
+            <input formControlName="email" type="email" id="email" class="main-input" />
+
+            @let emailControl = loginForms.get('email');
+
+            @if ( emailControl?.errors && emailControl?.touched) {
+            <div class="flex items-start gap-3 p-4 mb-4 text-sm text-red-700 rounded-lg bg-red-50 border border-red-200 shadow-sm"
+                role="alert">
+                <svg class="w-5 h-5 mt-0.5 shrink-0 text-red-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+
+                <div>
+                    <p class="font-semibold mb-1">email Error</p>
+
+                    <ul class="list-disc list-inside space-y-1">
+                        @if (emailControl?.getError('required')) {
+                        <li>email address input is required</li>
+                        }
+                        @else if (emailControl?.getError('email')) {
+                        <li>please enter valid email address </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="relative">
+             @let passwordControl = loginForms.get('password');
+            <label for="password" class="main-label">Password</label>
+            <input formControlName="password" [type]="flag===true?'password':'text'" id="password" class="main-input" />
+
+            <span (click)="togglePasswordType()" class="absolute top-0 end-2 translate-y-[140%] cursor-pointer">
+                <i
+                [class]="{'fa-eye':flag===true,
+                 'fa-eye-slash':flag===false
+                }" class="fas"></i>
+            </span>
+
+           
+
+            @if ( passwordControl?.errors && passwordControl?.touched) {
+            <div class="flex items-start gap-3 p-4 mb-4 text-sm text-red-700 rounded-lg bg-red-50 border border-red-200 shadow-sm"
+                role="alert">
+                <svg class="w-5 h-5 mt-0.5 shrink-0 text-red-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+
+                <div>
+                    <p class="font-semibold mb-1">pasword Error</p>
+
+                    <ul class="list-disc list-inside space-y-1">
+                        @if (passwordControl?.getError('required')) {
+                        <li>pasword input is required</li>
+                        }
+                        @else if (passwordControl?.getError('pattern')) {
+                        <li>please enter valid pasword </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+
+        <div class="flex justify-end pt-4">
+            <button type="submit" class="btn-main transition-transform duration-200 hover:scale-105">
+
+                @if(isloading()){
+                    <span><i class="fas fa-spinner animate"></i></span>
+                }
+
+                login
+            </button>
+
+        </div>
+
+        @if (errorMessage()) {
+        <div class="flex items-start gap-3 p-4 mb-4 text-sm text-red-700 rounded-lg bg-red-50 border border-red-200 shadow-sm"
+            role="alert">
+            <svg class="w-5 h-5 mt-0.5 shrink-0 text-red-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+
+            <div>
+                <p class="font-semibold mb-1">{{errorMessage()}}</p>
+
+            </div>
+        </div>
+        }
+    </form>
+</section>
