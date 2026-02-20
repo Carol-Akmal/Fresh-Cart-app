@@ -49,14 +49,13 @@ export class CartService {
 
   }
 
-  checkOutSession(cartId: string | null, checkOutData: object): Observable<PaymentDetailsResponse> {
-    const returnUrl = window.location.origin;
-
-    return this.httpClient.post<PaymentDetailsResponse>(environment.base_url + `orders/checkout-session/${cartId}?url=${returnUrl}`,
-      checkOutData,
-
-     );
-  }
+ checkOutSession(cartId: string | null, checkOutData: object): Observable<PaymentDetailsResponse> {
+  const returnUrl = window.location.origin; 
+  return this.httpClient.post<PaymentDetailsResponse>(
+    `${environment.base_url}orders/checkout-session/${cartId}?url=${encodeURIComponent(returnUrl)}`,
+    checkOutData
+  );
+}
 
   
 
